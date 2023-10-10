@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weatherOdin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search">
+        <input type="text" placeholder="Enter City Name">
+        <button><img src="imgweather/search.png" alt="weather"></button>
+    </div>
+    <div class="weather">
+        <img src="imgweather/rain.png" class="icon" alt="">
+        <h1 class="celcius">23°C</h1>
+        <h2 class="city">London</h2>
+        <div class="detail">
+            <div class="col">
+                <img src="imgweather/humidity.png" alt=""> 
+                <div class="humidity">
+                    <p class="humidityP">20%</p>
+                    <p>Humidity</p>
+                </div>   
+            </div>
+            <div class="col">
+                <img src="imgweather/wind.png" alt=""> 
+                <div class="wind">
+                    <p class="windS">20k/h</p>
+                    <p>Wind</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <script>
+        async function getWeather(){
+    var res = await fetch('https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon=london&appid=77b551fe2297c66195e5d34f598a48ad&units=metric');
+    var data = await res.json();
+    console.log(data);
+    document.querySelector('.celcius').innerHTML = data.main.temp;
+    document.querySelector('.city').innerHTML = data.name;
+    document.querySelector('.humidityP').innerHTML = data.main.humidity;
+    document.querySelector('.windS').innerHTML = data.wind.speed;
+        }
+
+        getWeather();
+    </script>
+</body>
+</html>
